@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width:auto;
+}
+.header{
+    display: flex;
+    width: 100vw;
+    height: 88px;
+    justify-content: space-around;
+    align-items: center;
+}
+.logo{
+    width: 65.4px;
+    height: 22.87px;
+    background-image: url(../app/images/Logo.png);
+}
+.search-bar{
+    width: 372px;
+    height: 56px;
+    display: flex;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    justify-content: left;
+    gap: 8px;
+    align-items: center;
+    padding-left: 15px;
+}
+.links{
+    width: 369px;
+    height: 19px;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-around; */
+    gap: 45px;
+}
+ul li{
+    font-size: 16px;
+    color: #909090;
+    font-weight: 450;
+    font-family: "Inter",system-ui;
+}
+.icons{
+    width: 144px;
+    height: 32px;
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+    /* justify-content: space-evenly; */
+    gap: 23px;
+}
+.icon{
+    width: 32px;
+    height: 32px;
+}
+.one{
+    background-image: url(../app/images/Favorites.png);
+}
+.two{
+    background-image: url(../app/images/Cart1.png);
+}
+.three{
+    background-image: url(../app/images/User.png);
+}
+.search-icon{
+    width: 24px;
+    height: 24px;
+    background-image: url(../app/images/Search.png);
+}
+.input{
+    width: 47px;
+    height: 18px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #656565;
+    font-size: 14px;
+    font-family: "Inter", system-ui;
+}
+.input::placeholder{
+    color: #656565;
+    font-size: 14px;
+    font-family: "Inter",system-ui;
+}
+.main{
+    width: 100vw;
+    height: 632px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    overflow: hidden;
+}
+.main-text{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: left;
+    width: 714px;
+    height: 256px;
+    gap: 24px;
+}
+.title-img{
+    width: 714px;
+    height: 128px;
+    background-image: url(../app/images/Titles.png);
+}
+.text{
+    width: 714px;
+    height: 24px;
+    font-size: 18px;
+    color: #909090;
+    font-family: "Inter",system-ui;
+}
+button{
+    width: 191px;
+    height: 56px;
+    padding-left: 36px;
+    padding-right: 36px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-radius: 6px;
+    border: 1px solid #fff;
+    color: #fff;
+    font-family: "Inter",system-ui;
+}
+li:hover{
+    cursor: pointer;
+}
+.active{
+    color: #000000;
+}
+.icon:hover{
+    cursor: pointer;
+}

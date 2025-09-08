@@ -1,11 +1,11 @@
-🛒 E-Commerce Website
+### 🛒 E-Commerce Website
 
 A responsive e-commerce web application built with Next.js / React / Tailwind CSS.
 This project demonstrates core frontend features of an e-commerce platform such as product browsing, cart, wishlist, and checkout flow.
 
 ⚡ Note: This is a frontend-only demo project. Authentication, backend APIs, and database integrations are not implemented. Some features are mock (static / UI-only).
 
-✨ Features
+## ✨ Features
 
 📦 Product Listing – Browse products in a clean UI
 
@@ -23,7 +23,7 @@ This project demonstrates core frontend features of an e-commerce platform such 
 
 ![Screenshot of homepage](image.png)
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
 Framework: Next.js (React)
 
@@ -33,23 +33,18 @@ State Management: Context API
 
 Icons & UI: (e.g., React Icons, Heroicons)
 
-🚀 Getting Started
+## 🚀 Getting Started
 
 Clone the repository:
 
 git clone https://github.com/Aashra55/NextJS-Projects
-cd ecommerce-website
-
-
-Install dependencies:
-
-npm install
+cd ecommerce-fresh-cart
 
 Run locally:
 
 npm run dev
 
-📌 Limitations
+## 📌 Limitations
 
 🔒 No authentication (Sign In / Sign Up are mock forms)
 
@@ -57,7 +52,7 @@ npm run dev
 
 🔎 Search bar is UI-only
 
-🎯 Future Improvements
+## 🎯 Future Improvements
 
 ✅ Integrate a backend (Node.js / Express / Next.js API routes)
 
@@ -69,7 +64,7 @@ npm run dev
 
 ✅ Implement real product search
 
-🙌 Acknowledgements
+## 🙌 Acknowledgements
 
 This project was created for learning purposes and to demonstrate frontend skills.
 It focuses on UI/UX and e-commerce workflows without backend logic.

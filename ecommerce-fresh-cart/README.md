@@ -1,4 +1,4 @@
-### 🛒 E-Commerce Website
+# 🛒 E-Commerce Website
 
 A responsive e-commerce web application built with Next.js / React / Tailwind CSS.
 This project demonstrates core frontend features of an e-commerce platform such as product browsing, cart, wishlist, and checkout flow.

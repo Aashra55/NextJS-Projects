@@ -19,7 +19,7 @@ This project demonstrates core frontend features of an e-commerce platform such 
 
 👤 User Account (Mock) – Sign in / Sign up forms created as static components
 
-🖼️ Screenshots
+🖼️ **Screenshots**
 
 ![Screenshot of homepage](image.png)
 

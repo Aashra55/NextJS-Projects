@@ -1,7 +1,10 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import { posts } from '../detail';
-import ClientPostActions from './ClientPostActions'; // Import client component for client-side logic
+import ClientPostActions from './ClientPostActions';
+import CommentSection from '@/app/components/commentSection';
+import { Clock, ChefHat, Sparkles, ArrowLeft, Lightbulb, Shuffle, Star, Check } from 'lucide-react';
 
 export async function generateStaticParams() {
   return posts.map((post) => ({
@@ -16,60 +19,159 @@ export default function PostDetail({ params }: { params: { slug: string } }) {
     notFound();
   }
 
-  const renderList = (items: string[]) => (
-    <ul className="list-disc pl-6 space-y-2 text-lg text-gray-700">
-      {items.map((item, index) => (
-        <li key={index}>{item}</li>
-      ))}
-    </ul>
-  );
-
   return (
-    <main className="py-12 px-6 lg:px-16 bg-gray-50">
-      <article className="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
-        <Image
-          src={post.image}
-          alt={post.title}
-          width={1200}
-          height={800}
-          className="w-full h-96 object-cover rounded-t-lg"
-        />
-        <div className="p-8">
-          <p className="text-sm text-gray-500 uppercase font-medium mb-4">
-            {post.category} - {post.date}
-          </p>
-          <h1 className="lg:text-4xl md:text-4xl text-2xl font-bold text-gray-900 mb-4">{post.title}</h1>
-          <p className="text-md text-gray-600 italic mb-6">By {post.author}</p>
-          <p className="text-lg text-gray-700 mb-6">{post.description}</p>
+    <main className="min-h-screen bg-[#FAF9F6] py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+      {/* Breadcrumb Navigation */}
+      <nav className="mb-6 flex items-center justify-between text-xs sm:text-sm text-slate-500">
+        <Link 
+          href="/" 
+          className="inline-flex items-center gap-1.5 font-semibold text-rose-600 hover:text-rose-700 hover:-translate-x-0.5 transition-all"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Back to Home</span>
+        </Link>
 
-          {/* Ingredients Section */}
-          <section className="mt-8">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Ingredients</h3>
-            {renderList(post.ingredients)}
-          </section>
+        <div className="hidden sm:flex items-center gap-2 text-stone-400">
+          <Link href="/" className="hover:text-slate-700">Home</Link>
+          <span>/</span>
+          <span className="text-slate-600 font-medium">Hero Recipes</span>
+          <span>/</span>
+          <span className="text-slate-800 font-medium truncate max-w-[200px]">{post.title}</span>
+        </div>
+      </nav>
 
-          {/* Instructions Section */}
-          <section className="mt-8">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Instructions</h3>
-            {renderList(post.instructions)}
-          </section>
+      <article className="bg-white border border-stone-200/80 shadow-sm rounded-3xl overflow-hidden">
+        {/* Hero Photo Banner */}
+        <div className="relative h-80 sm:h-[450px] w-full overflow-hidden bg-stone-100">
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          
+          <div className="absolute top-6 left-6 flex items-center gap-2">
+            <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/95 backdrop-blur-md text-slate-900 shadow-sm">
+              {post.category}
+            </span>
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-black/60 backdrop-blur-md text-amber-300 flex items-center gap-1">
+              <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+              <span>4.9 Featured</span>
+            </span>
+          </div>
 
-          {/* Tips Section */}
-          <section className="mt-8">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Tips</h3>
-            {renderList(post.tips)}
-          </section>
-
-          {/* Variations Section */}
-          <section className="mt-8">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Variations</h3>
-            {renderList(post.variations)}
-          </section>
+          <div className="absolute bottom-6 left-6 right-6 text-white">
+            <p className="text-xs sm:text-sm font-medium text-rose-200 uppercase tracking-widest mb-1.5">
+              By {post.author} • Published on {post.date}
+            </p>
+            <h1 className="font-serif-title text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              {post.title}
+            </h1>
+          </div>
         </div>
 
-        {/* Client-Side Share Button */}
-        <ClientPostActions post={post} />
+        {/* Content Body */}
+        <div className="p-6 sm:p-10 lg:p-12 space-y-10">
+          
+          {/* Description */}
+          <div className="border-b border-stone-100 pb-8">
+            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-sans">
+              {post.description}
+            </p>
+          </div>
+
+          {/* Two-Column Grid: Ingredients & Instructions */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            {/* Ingredients */}
+            <section className="lg:col-span-5 bg-stone-50/70 p-6 sm:p-8 rounded-3xl border border-stone-200/80">
+              <div className="flex items-center gap-2 mb-4 pb-2 border-b border-stone-200/60">
+                <ChefHat className="w-5 h-5 text-rose-600" />
+                <h2 className="font-serif-title text-2xl font-bold text-slate-900">
+                  Ingredients
+                </h2>
+              </div>
+
+              <ul className="space-y-3">
+                {post.ingredients.map((item: string, index: number) => (
+                  <li key={index} className="flex items-start gap-3 text-sm text-slate-800 leading-relaxed">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {/* Instructions */}
+            <section className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/80 shadow-sm">
+              <div className="flex items-center gap-2 mb-6 pb-2 border-b border-stone-100">
+                <Clock className="w-5 h-5 text-rose-600" />
+                <h2 className="font-serif-title text-2xl font-bold text-slate-900">
+                  Step-by-Step Instructions
+                </h2>
+              </div>
+
+              <ol className="space-y-5">
+                {post.instructions.map((instruction: string, index: number) => (
+                  <li key={index} className="flex items-start gap-4 text-sm sm:text-base text-slate-700 leading-relaxed">
+                    <span className="w-7 h-7 rounded-full bg-rose-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 shadow-sm shadow-rose-500/20">
+                      {index + 1}
+                    </span>
+                    <span className="pt-0.5">{instruction}</span>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          </div>
+
+          {/* Tips & Variations Callouts */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+            {/* Tips Section */}
+            {post.tips && post.tips.length > 0 && (
+              <div className="bg-amber-50/80 p-6 rounded-3xl border border-amber-200/80">
+                <div className="flex items-center gap-2.5 mb-3 text-amber-950 font-serif-title text-xl font-bold">
+                  <Lightbulb className="w-5 h-5 text-amber-600" />
+                  <h3>Chef&apos;s Pro Tips</h3>
+                </div>
+                <ul className="space-y-2 text-xs sm:text-sm text-amber-900 leading-relaxed">
+                  {post.tips.map((tip: string, index: number) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="text-amber-500 font-bold">•</span>
+                      <span>{tip}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Variations Section */}
+            {post.variations && post.variations.length > 0 && (
+              <div className="bg-rose-50/80 p-6 rounded-3xl border border-rose-200/80">
+                <div className="flex items-center gap-2.5 mb-3 text-rose-950 font-serif-title text-xl font-bold">
+                  <Shuffle className="w-5 h-5 text-rose-600" />
+                  <h3>Variations &amp; Swaps</h3>
+                </div>
+                <ul className="space-y-2 text-xs sm:text-sm text-rose-900 leading-relaxed">
+                  {post.variations.map((variation: string, index: number) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="text-rose-500 font-bold">•</span>
+                      <span>{variation}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {/* Client-Side Share & Print Actions */}
+          <ClientPostActions post={post} />
+        </div>
       </article>
+
+      {/* Reviews & Discussion */}
+      <CommentSection />
     </main>
   );
 }
